@@ -46,20 +46,6 @@ module.exports = function (req, res, url) {
 		}
 
 		case "POST": {
-			if (!url.path.startsWith("/fbapi/getMovie/")) return;
-			res.setHeader("Content-Type", "application/zip");
-
-			movie
-				.loadZip(url.query.movieId)
-				.then((b) => res.end(Buffer.concat([base, b])))
-				.catch(() => res.end("1"));
-			return true;
-		}
-		default:
-			return;
-	},
-	
-	case "POST": {
 			if (!url.path.startsWith("/goapi/getMovie/")) return;
 			res.setHeader("Content-Type", "application/zip");
 
@@ -71,5 +57,5 @@ module.exports = function (req, res, url) {
 		}
 		default:
 			return;
-	}
+
 };
