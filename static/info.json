@@ -2,7 +2,7 @@
 	"GET": {
 		"/recorder": {
 			"headers": {
-				"Location": "/html/list.html"
+				"Location": "https://www.anistick.com/anirecorder"
 			},
 			"statusCode": 302,
 			"content": ""
