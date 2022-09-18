@@ -51,7 +51,8 @@ function invokeGetDisplayMedia(success, error) {
     // above constraints are NOT supported YET
     // that's why overriding them
     displaymediastreamconstraints = {
-        video: true
+        video: true,
+        audio: true
     };
 
     if(navigator.mediaDevices.getDisplayMedia) {
