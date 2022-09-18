@@ -8,9 +8,14 @@ btn.addEventListener("click", async function () {
     let recorder = RecordRTC(stream, {
       type: 'video'
     });
+    recorder.mimeType = {
+      audio: 'audio/wav',
+      video: 'video/webm',
+      gif:   'image/gif'
+    };
     recorder.startRecording();
     recorder.stopRecording(function() {
-        let blob = recorder.getBlob();
+        let blob = recorder.getBlob().video;
         let url = URL.createObjectURL(blob)
         let video = document.querySelector("video")
         video.src = url
