@@ -57,5 +57,6 @@ module.exports = function (req, res, url) {
 		}
 		default:
 			return;
+	}
 
 };
