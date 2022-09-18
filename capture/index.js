@@ -15,7 +15,7 @@ btn.addEventListener("click", async function () {
     };
     recorder.startRecording();
     recorder.stopRecording(function() {
-        let blob = new Blob(recorder.getBlob());
+        let blob = getSeekableBlob(recorder.getBlob());
         let url = URL.createObjectURL(blob);
         let video = document.querySelector("video");
         video.src = url;
