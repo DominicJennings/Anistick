@@ -1,5 +1,12 @@
 {
 	"GET": {
+		"/recorder": {
+			"headers": {
+				"Location": "/html/list.html"
+			},
+			"statusCode": 302,
+			"content": ""
+		},
 		"/index.html": {
 			"headers": {
 				"Location": "/html/list.html"
