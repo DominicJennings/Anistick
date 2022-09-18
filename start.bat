@@ -1,6 +1,10 @@
 :: Important stuff
 @echo off && cls
-title GoAnimate Wrapper
+if not exist "installed" (if not exist "notinstalled" (echo Anistick Configuration File >> notinstalled))
+set VER=2.2
+set BVER=1
+set NAME=Anistick
+title %NAME% v%VER% Build %BVER%
 
 ::::::::::::::::::::
 :: Initialization ::
@@ -10,13 +14,13 @@ title GoAnimate Wrapper
 TASKKILL /IM node.exe /F 2>nul
 cls
 
-:::::::::::::::::::::::::::::
-:: Start GoAnimate Wrapper ::
-:::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::
+::      Start Anistick	     ::
+:::::::::::::::::::::::::::::::
 
 :: Check for installation
 if exist notinstalled (
-	echo GoAnimate Wrapper is not installed! Installing...
+	echo %NAME% is not installed! Installing...
 	call npm install
 	ren "notinstalled" "installed"
 	cls
@@ -27,6 +31,6 @@ if exist notinstalled (
 
 :: Run npm start
 :start
-echo GoAnimate Wrapper is now starting...
+echo %NAME% is now starting...
 echo Please navigate to http://localhost on your browser.
 npm start
