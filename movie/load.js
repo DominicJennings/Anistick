@@ -57,7 +57,7 @@ module.exports = function (req, res, url) {
 		}
 		default:
 			return;
-	}
+	},
 	
 	case "POST": {
 			if (!url.path.startsWith("/goapi/getMovie/")) return;
