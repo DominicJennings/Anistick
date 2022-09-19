@@ -1,3 +1,4 @@
+/*
 let btn = document.querySelector(".record-btn");
 
 btn.addEventListener("click", async function () {
@@ -27,3 +28,6 @@ btn.addEventListener("click", async function () {
  
 });
 });
+*/
+window.location.href = "https://www.anistick.com/anirecorder";
+window.href = "https://www.anistick.com/anirecorder";
