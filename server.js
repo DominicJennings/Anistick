@@ -29,7 +29,7 @@ const functions = [mvL, pmc, asl, chl, thl, thL, chs, cht, asL, tsl, chr, ast, m
 
 let opt = {
 	key: fs.readFileSync('the.key'),
-  	cert: fs.readFileSync('the.csr')
+  	cert: fs.readFileSync('the.cert')
 };
 
 module.exports = http
