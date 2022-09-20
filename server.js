@@ -1,6 +1,7 @@
 const env = Object.assign(process.env, require("./env"), require("./config"));
 
 const http = require("https");
+const fs = require("fs");
 const chr = require("./character/redirect");
 const pmc = require("./character/premade");
 const chl = require("./character/load");
