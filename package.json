@@ -12,6 +12,7 @@
 		"js-md5": "github:anistick/anijs-md5",
 		"mp3-duration": "github:anistick/animp3-duration",
 		"node-zip": "github:anistick/aninode-zip",
-		"xmldoc": "github:anistick/anixmldoc"
+		"xmldoc": "github:anistick/anixmldoc",
+		"electron": "github:anistick/anielectron"
 	}
 }
