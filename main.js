@@ -2,6 +2,7 @@ const env = Object.assign(process.env, require("./env"), require("./config"));
 const { app, BrowserWindow, Menu } = require("electron");
 const fs = require("fs");
 const path = require("path");
+require("./server");
 let pluginName;
 switch (process.platform) {
 	case "win32": {
