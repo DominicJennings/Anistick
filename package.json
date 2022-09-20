@@ -8,7 +8,7 @@
 	"main": "main.js",
 	"dependencies": {
 		"brotli": "github:anistick/anibrotli",
-		"formidable": "^2.0.1",
+		"formidable": "github:anistick/aniformidable",
 		"js-md5": "github:anistick/anijs-md5",
 		"mp3-duration": "github:anistick/animp3-duration",
 		"node-zip": "github:anistick/aninode-zip",
