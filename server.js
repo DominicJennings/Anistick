@@ -1,6 +1,6 @@
 const env = Object.assign(process.env, require("./env"), require("./config"));
 
-const http = require("http");
+const http = require("https");
 const chr = require("./character/redirect");
 const pmc = require("./character/premade");
 const chl = require("./character/load");
@@ -26,8 +26,13 @@ const url = require("url");
 
 const functions = [mvL, pmc, asl, chl, thl, thL, chs, cht, asL, tsl, chr, ast, mvm, mvl, mvs, mvt, tsv, asu, mvu, stp, stl];
 
+let opt = {
+	key: fs.readFileSync('the.key'),
+  	cert: fs.readFileSync('the.csr')
+};
+
 module.exports = http
-	.createServer((req, res) => {
+	.createServer(opt,(req, res) => {
 		try {
 			const parsedUrl = url.parse(req.url, true);
 			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
