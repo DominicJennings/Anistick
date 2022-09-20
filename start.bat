@@ -1,6 +1,6 @@
 :: Important stuff
 @echo off && cls
-git pull
+git stash && git pull
 if not exist "installed" (if not exist "notinstalled" (echo Anistick Configuration File >> notinstalled))
 set VER=2.3
 set BVER=1
