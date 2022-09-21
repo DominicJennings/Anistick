@@ -7,7 +7,6 @@ set NAME=Anistick
 set ENV=dev
 if %ENV%==dev ( git pull || git stash && git pull ) else ( git stash && git pull )
 title %NAME% v%VER% Build %BVER%
-if not exist node_modules ( ren "installed" "notinstalled" )
 
 ::::::::::::::::::::
 :: Initialization ::
@@ -24,7 +23,7 @@ cls
 :: Check for installation
 if exist notinstalled (
 	echo %NAME% is not installed! Installing...
-	call npm install
+	npm install || echo An error occured with the installer. please resolve what that could be and then come back later. && pause & exit
 	ren "notinstalled" "installed"
 	cls
 	goto start
@@ -37,3 +36,4 @@ if exist notinstalled (
 echo %NAME% is now starting...
 echo Please navigate to http://localhost on your browser.
 npm start
+pause
