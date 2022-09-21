@@ -1,11 +1,13 @@
 :: Important stuff
 @echo off && cls
-git stash && git pull
 if not exist "installed" (if not exist "notinstalled" (echo Anistick Configuration File >> notinstalled))
 set VER=2.3
 set BVER=1
 set NAME=Anistick
+set ENV=dev
+if %ENV%==dev ( git pull || git stash && git pull ) else ( git stash && git pull )
 title %NAME% v%VER% Build %BVER%
+if not exist node_modules ( ren "installed" "notinstalled" )
 
 ::::::::::::::::::::
 :: Initialization ::
