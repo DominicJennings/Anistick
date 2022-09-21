@@ -1,4 +1,4 @@
-const env = Object.assign(process.env, require("./env"), require("./config"));
+const env = process.env;
 
 const http = require("https");
 const fs = require("fs");

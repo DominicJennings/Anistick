@@ -34,6 +34,6 @@ if exist notinstalled (
 :: Run npm start
 :start
 echo %NAME% is now starting...
-echo Please navigate to http://localhost on your browser.
+echo Please go into https://localhost:8140 as chromium starts.
 npm start
 pause
