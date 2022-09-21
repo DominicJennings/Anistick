@@ -11,6 +11,8 @@ const http = require("http");
 module.exports = function (req, res, url) {
 	var path = url.pathname;
 	if (req.method != "GET" || !path.startsWith("/stock_thumbs")) return;
-	get(thumbUrl + path.substr(path.lastIndexOf("/"))).then((v) => res.end(v));
+	get(thumbUrl + path.substr(path.lastIndexOf("/"))).then((v) => res.end(v)).catch(e => {
+		console.log(e);
+	});
 	return true;
 };

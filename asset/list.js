@@ -1,6 +1,6 @@
-const loadPost = require("../misc/post_body");
+const loadPost = require("../request/post_body");
 const header = process.env.XML_HEADER;
-const fUtil = require("../misc/file");
+const fUtil = require("../fileUtil");
 const nodezip = require("node-zip");
 const base = Buffer.alloc(1, 0);
 const asset = require("./main");
@@ -127,7 +127,7 @@ module.exports = function (req, res, url) {
 		}
 		case "POST": {
 			loadPost(req, res)
-				.then(([data]) => listAssets(data, makeZip))
+				.then(data => listAssets(data, makeZip))
 				.then((buff) => {
 					const type = makeZip ? "application/zip" : "text/xml";
 					res.setHeader("Content-Type", type);

@@ -4,7 +4,7 @@ const caché = require("./caché");
 
 module.exports = {
 	load(mId, aId) {
-		return caché.load(mId, aId);
+		return new Promise((res) => res(caché.load(mId, aId)));
 	},
 	save(buffer, mId, mode, ext) {
 		var suffix = `-${mode}.${ext}`;

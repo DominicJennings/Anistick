@@ -1,4 +1,4 @@
-const loadPost = require("../misc/post_body");
+const loadPost = require("../request/post_body");
 const character = require("./main");
 const http = require("http");
 
@@ -12,7 +12,7 @@ module.exports = function (req, res, url) {
 	if (req.method == "POST")
 		switch (url.pathname) {
 			case "/goapi/saveCCCharacter/":
-				loadPost(req, res).then(([data]) =>
+				loadPost(req, res).then(data =>
 					character
 						.save(Buffer.from(data.body))
 						.then((id) => {
@@ -25,7 +25,7 @@ module.exports = function (req, res, url) {
 				return true;
 
 			case "/goapi/saveCCThumbs/":
-				loadPost(req, res).then(([data]) => {
+				loadPost(req, res).then(data => {
 					var id = data.assetId;
 					var thumb = Buffer.from(data.thumbdata, "base64");
 					character.saveThumb(thumb, id);

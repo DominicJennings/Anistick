@@ -1,4 +1,5 @@
-const loadPost = require("../misc/post_body");
+const loadPost = require("../request/post_body");
+const util = require("../misc/util");
 const asset = require("./main");
 const http = require("http");
 
@@ -11,19 +12,12 @@ const http = require("http");
 module.exports = function (req, res, url) {
 	switch (req.method) {
 		case "GET": {
-			const match = req.url.match(/\/assets\/([^/]+)\/([^.]+)(?:\.xml)?$/);
+			const match = req.url.match(/\/(assets|goapi\/getAsset)\/([^/]+)\/([^/]+)$/);
 			if (!match) return;
 
 			const mId = match[1];
 			const aId = match[2];
-			const b = asset.load(mId, aId);
-			if (b) {
-				res.statusCode = 200;
-				res.end(b);
-			} else {
-				res.statusCode = 404;
-				res.end(e);
-			}
+			asset.load(mId, aId).then(b => res.end(b)).catch(e => res.end(`<center><h1>${e}</h1></center>`));
 			return true;
 		}
 
@@ -31,18 +25,17 @@ module.exports = function (req, res, url) {
 			switch (url.pathname) {
 				case "/goapi/getAsset/":
 				case "/goapi/getAssetEx/": {
-					loadPost(req, res).then(([data, mId]) => {
-						const aId = data.assetId || data.enc_asset_id;
+					loadPost(req, res).then(data => {
 
-						const b = asset.load(mId, aId);
-						if (b) {
+						asset.load(data.movieId, data.assetId).then(b => {
 							res.setHeader("Content-Length", b.length);
 							res.setHeader("Content-Type", "audio/mp3");
 							res.end(b);
-						} else {
+						}).catch(e => {
 							res.statusCode = 404;
-							res.end();
-						}
+							res.end(1 + util.xmlFail(e));
+							console.log(e);
+						});
 					});
 					return true;
 				}
