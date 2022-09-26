@@ -23,7 +23,7 @@ cls
 :: Check for installation
 if exist notinstalled (
 	echo %NAME% is not installed! Installing...
-	npm install || echo An error occured with the installer. please resolve what that could be and then come back later. && pause & exit
+	npm install || echo An error occured with the installer. Please try to resolve the error and come back later. && pause & exit
 	ren "notinstalled" "installed"
 	cls
 	goto start
@@ -34,6 +34,6 @@ if exist notinstalled (
 :: Run npm start
 :start
 echo %NAME% is now starting...
-echo Please go into https://localhost:8140 as chromium starts.
+echo Please navigate to https://localhost:8140 as Chromium starts.
 npm start
 pause
