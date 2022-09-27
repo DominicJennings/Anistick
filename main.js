@@ -1,23 +1,59 @@
-/* Before you ask me kia, Why did i remove the app window function from this file and replaced it as this was a web app?
-Well, lets just say that things wern't working quite well with the app window as it opens. 
-it came up with errors saying that the url failed to load on an https interface.
-As a bug fix, i added a browser launcher as in you have to open up localhost as chromium opens.
-Pretty cool system, huh? Well, see you next time on dms.
-*/
-const server = () => require("./server");
-const path = require('path');
 const env = Object.assign(process.env, require("./env"), require("./config"));
-const fs = require('fs');
-var chrome;
-// most devs have lvm clones stored in github desktop. so this will change for devs and users.
-if (env.NODE_ENV == "dev") chrome = path.join(__dirname, "../../../AppData/Local/Chromium/Application");
-else chrome = path.join(__dirname, "../../AppData/Local/Chromium/Application");
-var exec = require('child_process').execFile;
-var browser = () => {
-	exec(`${chrome}/chrome.exe`, function(err, data) { 
-		if (err) console.error("Error Launching Chromium.", err);
-		else console.log("Launching Chromium...", data);
-	});
+const { app, BrowserWindow, Menu } = require("electron");
+const server = () => require("./server");
+let pluginName;
+switch (process.platform) {
+	case "win32": {
+		pluginName = "./extensions/pepflashplayer.dll";
+		break;
+	} case "darwin": {
+		pluginName = "./extensions/PepperFlashPlayer.plugin";
+		break;
+	} case "linux": {
+		pluginName = "./extensions/libpepflashplayer.so";
+		// i don't know what this does but it makes flash work
+		app.commandLine.appendSwitch("no-sandbox");
+		break;
+	}
 }
-browser();
-server();
+app.commandLine.appendSwitch("ppapi-flash-path", path.join(__dirname, pluginName));
+app.commandLine.appendSwitch("ppapi-flash-version", "32.0.0.371");
+
+let mainWindow;
+const createWindow = () => {
+	mainWindow = new BrowserWindow({
+		width: 1200,
+		height: 700,
+		title: "Anistick",
+		icon: path.join(__dirname, "./favicon.ico"),
+		webPreferences: {
+			plugins: true,
+			contextIsolation: true
+		}
+	});
+	// use it in external scripts
+	process.env.MAIN_WINDOW_ID = mainWindow.id;
+
+	// initialize stuff
+	// clear the menu bar
+	Menu.setApplicationMenu(Menu.buildFromTemplate([]));
+	// load the video list
+	mainWindow.loadURL("https://localhost:8140");
+	mainWindow.on("closed", () => mainWindow = null);
+
+	// debug stuff
+	if (env.NODE_ENV == "dev") {
+		mainWindow.webContents.openDevTools();
+	}
+};
+
+app.whenReady().then(() => {
+	// wait for the server
+	setTimeout(createWindow, 2000);
+});
+app.on("window-all-closed", () => {
+	if (process.platform !== "darwin") app.quit();
+});
+app.on("activate", () => {
+	if (mainWindow === null) createWindow();
+});
