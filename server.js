@@ -68,4 +68,4 @@ function scf() {
 	})
 	.listen(env.HTTPS_PORT, "0.0.0.0");
 };
-module.exports = scf;
+module.exports.scf = scf;
