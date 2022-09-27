@@ -1,4 +1,4 @@
-const env = process.env;
+const env = Object.assign(process.env, require("./env"), require("./config"));
 
 const http = require("https");
 const fs = require("fs");
@@ -48,4 +48,4 @@ module.exports = http
 			res.end();
 		}
 	})
-	.listen(80, "0.0.0.0");
+	.listen(env.SERVER_PORT, "0.0.0.0");
