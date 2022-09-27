@@ -48,4 +48,4 @@ module.exports = http
 			res.end();
 		}
 	})
-	.listen(80, console.log);
+	.listen(80, "0.0.0.0");
