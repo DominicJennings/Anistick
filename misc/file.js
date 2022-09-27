@@ -1,4 +1,5 @@
-const folder = "./_SAVED";
+const env = Object.assign(process.env, require("../env"), require("../config"));
+const folder = env.SAVED_FOLDER;
 const nodezip = require("node-zip");
 const fs = require("fs");
 
