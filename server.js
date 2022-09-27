@@ -34,7 +34,7 @@ let opt = {
 };
 
 module.exports = http
-	.createServer(req, res) => {
+	.createServer(req, res) {
 		try {
 			const parsedUrl = url.parse(req.url, true);
 			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
@@ -53,7 +53,7 @@ module.exports = http
 
 
 module.exports = https
-	.createServer(opt, (req, res) => {
+	.createServer(opt, (req, res) {
 		try {
 			const parsedUrl = url.parse(req.url, true);
 			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
