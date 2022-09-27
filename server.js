@@ -1,6 +1,6 @@
 const env = process.env;
 
-const http = require("http");
+const http = require("https");
 const fs = require("fs");
 const chr = require("./character/redirect");
 const pmc = require("./character/premade");
@@ -33,7 +33,7 @@ let opt = {
 };
 
 module.exports = http
-	.createServer(req, res) => {
+	.createServer(opt, (req, res) => {
 		try {
 			const parsedUrl = url.parse(req.url, true);
 			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
