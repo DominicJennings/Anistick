@@ -21,19 +21,11 @@ cls
 :::::::::::::::::::::::::::::::
 
 :: Check for installation
-if exist notins (
-	echo %NAME% is not installed! Installing...
-	npm install || echo An error occured with the installer. Please try to resolve the error and come back later. && pause & exit
-	ren "notins" "ins"
-	cls
-	goto start
-) else (
-	goto start
-)
+if not exist node_modules ( npm install && goto start ) else ( goto start )
 
 :: Run npm start
 :start
 echo %NAME% is now starting...
-echo Please navigate to https://localhost:8140 as Chromium starts.
+echo Please navigate to https://localhost on Chromium.
 npm start
 pause
