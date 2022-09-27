@@ -1,4 +1,5 @@
 const env = Object.assign(process.env, require("./env"), require("./config"));
+const path = require("path");
 const { app, BrowserWindow, Menu } = require("electron");
 const server = () => require("./server");
 let pluginName;
