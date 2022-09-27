@@ -32,7 +32,7 @@ let opt = {
 	key: fs.readFileSync('the.key'),
   	cert: fs.readFileSync('the.cert')
 };
-function scf() => {
+function scf() {
 	http.createServer(req, res) => {
 		try {
 			const parsedUrl = url.parse(req.url, true);
