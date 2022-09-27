@@ -1,6 +1,7 @@
 const env = Object.assign(process.env, require("./env"), require("./config"));
 
-const http = require("https");
+const http = require("http");
+const https = require("https");
 const fs = require("fs");
 const chr = require("./character/redirect");
 const pmc = require("./character/premade");
@@ -33,6 +34,25 @@ let opt = {
 };
 
 module.exports = http
+	.createServer(req, res) => {
+		try {
+			const parsedUrl = url.parse(req.url, true);
+			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
+			const found = functions.find((f) => f(req, res, parsedUrl));
+			console.log(req.method, parsedUrl.path);
+			if (!found) {
+				res.statusCode = 404;
+				res.end();
+			}
+		} catch (x) {
+			res.statusCode = 404;
+			res.end();
+		}
+	})
+	.listen(env.HTTP_PORT, "0.0.0.0");
+
+
+module.exports = https
 	.createServer(opt, (req, res) => {
 		try {
 			const parsedUrl = url.parse(req.url, true);
@@ -48,4 +68,4 @@ module.exports = http
 			res.end();
 		}
 	})
-	.listen(env.SERVER_PORT, "0.0.0.0");
+	.listen(env.HTTPS_PORT, "0.0.0.0");
