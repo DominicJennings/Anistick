@@ -48,4 +48,4 @@ module.exports = http
 			res.end();
 		}
 	})
-	.listen(env.SERVER_PORT, console.log);
+	.listen(80, console.log);
