@@ -1,4 +1,4 @@
-const folder = process.env.SAVED_FOLDER;
+const folder = "./_SAVED";
 const nodezip = require("node-zip");
 const fs = require("fs");
 
