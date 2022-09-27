@@ -32,9 +32,8 @@ let opt = {
 	key: fs.readFileSync('the.key'),
   	cert: fs.readFileSync('the.cert')
 };
-
-module.exports = http
-	.createServer(req, res) {
+function scf() {
+	http.createServer(req, res) {
 		try {
 			const parsedUrl = url.parse(req.url, true);
 			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
@@ -52,8 +51,7 @@ module.exports = http
 	.listen(env.HTTP_PORT, "0.0.0.0");
 
 
-module.exports = https
-	.createServer(opt, (req, res) {
+	https.createServer(opt, (req, res) {
 		try {
 			const parsedUrl = url.parse(req.url, true);
 			//if (!parsedUrl.path.endsWith('/')) parsedUrl.path += '/';
@@ -69,3 +67,5 @@ module.exports = https
 		}
 	})
 	.listen(env.HTTPS_PORT, "0.0.0.0");
+};
+module.exports = scf;
