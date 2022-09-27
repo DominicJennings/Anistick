@@ -3,7 +3,7 @@
 	"version": "2.3",
 	"versionStr": "2.3",
 	"scripts": {
-		"start": "electron . --unhandled-rejections=strict"
+		"start": "node main.js"
 	},
 	"main": "main.js",
 	"dependencies": {
