@@ -1,6 +1,6 @@
 :: Important stuff
 @echo off && cls
-if not exist "installed" (if not exist "notinstalled" (echo Anistick Configuration File >> notinstalled))
+if not exist "ins" (if not exist "notins" (echo Anistick Configuration File >> notins))
 set VER=2.3
 set BVER=1
 set NAME=Anistick
@@ -13,7 +13,7 @@ title %NAME% v%VER% Build %BVER%
 ::::::::::::::::::::
 
 :: Terminate existing node.js apps
-TASKKILL /IM node.exe /F 2>nul
+taskkill /f /im node.exe
 cls
 
 :::::::::::::::::::::::::::::::
@@ -21,10 +21,10 @@ cls
 :::::::::::::::::::::::::::::::
 
 :: Check for installation
-if exist notinstalled (
+if exist notins (
 	echo %NAME% is not installed! Installing...
 	npm install || echo An error occured with the installer. Please try to resolve the error and come back later. && pause & exit
-	ren "notinstalled" "installed"
+	ren "notins" "ins"
 	cls
 	goto start
 ) else (
