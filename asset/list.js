@@ -7,7 +7,7 @@ const asset = require("./main");
 const http = require("http");
 
 async function listAssets(data, makeZip) {
-	var xmlString;
+	var xmlString, files;
 	switch (data.type) {
 		case "char": {
 			const chars = await asset.chars(data.themeId);
@@ -20,14 +20,14 @@ async function listAssets(data, makeZip) {
 			break;
 		}
 		case "bg": {
-			var files = asset.list(data.movieId, "bg");
+			files = asset.list(data.movieId, "bg");
 			xmlString = `${header}<ugc more="0">${files
 				.map((v) => `<background subtype="0" id="${v.id}" name="${v.name}" enable="Y"/>`)
 				.join("")}</ugc>`;
 			break;
 		}
 		case "sound": {
-			var files = asset.list(data.movieId, "voiceover");
+			files = asset.list(data.movieId, "voiceover");
 			xmlString = `${header}<ugc more="0">${files
 				.map(
 					(v) =>
@@ -37,7 +37,7 @@ async function listAssets(data, makeZip) {
 			break;
 		}	
 		case "movie": {
-			var files = asset.list(data.movieId, "starter");
+			files = asset.list(data.movieId, "starter");
 			xmlString = `${header}<ugc more="0">${files
 				.map(
 					(v) =>
@@ -48,7 +48,7 @@ async function listAssets(data, makeZip) {
 		}
 		case "prop":
 		default: {
-			var files = asset.list(data.movieId, "prop");
+			files = asset.list(data.movieId, "prop");
 			xmlString = `${header}<ugc more="0">${files
 				.map(
 					(v) =>
