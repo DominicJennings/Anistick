@@ -30,7 +30,7 @@ function save(id, data) {
 }
 
 fUtil.getValidFileIndicies("char-", ".xml").map((n) => {
-	return addTheme(`c-${n}`, fs.readFileSync(fUtil.getFileIndex("cc-char-", ".xml", n)));
+	return addTheme(`c-${n}`, fs.readFileSync(fUtil.getFileIndex("char-", ".xml", n)));
 });
 
 /**
@@ -43,7 +43,7 @@ function getCharPath(id) {
 	var suffix = id.substr(i + 1);
 	switch (prefix) {
 		case "c":
-			return fUtil.getFileIndex("cc-char-", ".xml", suffix);
+			return fUtil.getFileIndex("char-", ".xml", suffix);
 		case "C":
 		default:
 			return `${cachéFolder}/char.${id}.xml`;
@@ -59,7 +59,7 @@ function getThumbPath(id) {
 	var suffix = id.substr(i + 1);
 	switch (prefix) {
 		case "c":
-			return fUtil.getFileIndex("cc-char-", ".png", suffix);
+			return fUtil.getFileIndex("char-", ".png", suffix);
 		case "C":
 		default:
 			return `${cachéFolder}/char.${id}.png`;
