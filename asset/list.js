@@ -61,33 +61,11 @@ async function listAssets(data, makeZip) {
 
 	if (makeZip) {
 		const zip = nodezip.create();
-		const files = asset.listAll(data.movieId);
 		fUtil.addToZip(zip, "desc.xml", Buffer.from(xmlString));
 
 		files.forEach((file) => {
-			switch (file.mode) {
-				case "bg": {
-					const buffer = asset.load(data.movieId, file.id);
-					fUtil.addToZip(zip, `${file.mode}/${file.id}`, buffer);
-					break;
-				}
-				case "movie": {
-					const buffer = asset.load(data.movieId, file.id);
-					fUtil.addToZip(zip, `${file.mode}/${file.id}`, buffer);
-					break;
-				}
-				case "sound": {
-					const buffer = asset.load(data.movieId, file.id);
-					fUtil.addToZip(zip, `${file.mode}/${file.id}`, buffer);
-					break;
-				}
-				case "effect":
-				case "prop": {
-					const buffer = asset.load(data.movieId, file.id);
-					fUtil.addToZip(zip, `${file.mode}/${file.id}`, buffer);
-					break;
-				}
-			}
+			const buffer = asset.load(data.movieId, file.id);
+			fUtil.addToZip(zip, `${file.mode}/${file.id}`, buffer);
 		});
 		return await zip.zip();
 	} else {
